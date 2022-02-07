@@ -1,3 +1,3 @@
-<figure *ngFor="let cell of cells; let last = last; let i = index;" [ngClass]="{empty: last}">
-    <img alt="" *ngIf="!last" class="img{{i + 1}}">
-</figure>
+<div class="img-container" *ngFor="let cell of cells; let last = last; let i = index;" [ngClass]="{empty: last}">
+    <div *ngIf="!last" class="img img{{i + 1}}"></div>
+</div>
