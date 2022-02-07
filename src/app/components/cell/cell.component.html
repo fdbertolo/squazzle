@@ -1,0 +1,3 @@
+<figure *ngFor="let cell of cells; let last = last;" [ngClass]="{empty: last}">
+    <img src="https://placedog.net/100" alt="" *ngIf="!last">
+</figure>

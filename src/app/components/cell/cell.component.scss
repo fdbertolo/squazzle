@@ -1,0 +1,30 @@
+@import 'src/styles';
+
+:host {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    max-width: 330px;
+    justify-content: center;
+}
+
+figure {
+    margin: 0;
+    &.empty {
+        width: 100px;
+        height: 100px;
+        border-radius: 2px;
+        background-color: $dark-grey;
+    }
+    img {
+        width: 100px;
+        height: 100px;
+        border-radius: 2px;
+        background-size: cover;
+        box-sizing: border-box;
+        &:hover {
+            cursor: pointer;
+            border: 2px solid $white;
+        }
+    }
+}
