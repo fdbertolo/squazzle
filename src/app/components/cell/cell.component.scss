@@ -20,11 +20,19 @@ figure {
         width: 100px;
         height: 100px;
         border-radius: 2px;
-        background-size: cover;
         box-sizing: border-box;
+        background: url('https://placedog.net/310/310');
         &:hover {
             cursor: pointer;
             border: 2px solid $white;
         }
+        &.img1 {background-position: top left;}
+        &.img2 {background-position: top center;}
+        &.img3 {background-position: top right;}
+        &.img4 {background-position: center left;}
+        &.img5 {background-position: center;}
+        &.img6 {background-position: center right;}
+        &.img7 {background-position: bottom left;}
+        &.img8 {background-position: bottom center;}
     }
 }
