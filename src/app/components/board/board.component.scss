@@ -2,6 +2,12 @@
 
 section {
     display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    max-width: 330px;
     justify-content: center;
-    margin-top: 24px;
+}
+
+.cell-row {
+    display: flex;
 }

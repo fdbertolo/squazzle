@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Cell } from '../../core/models/game';
 
 @Component({
   selector: 'app-cell',
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CellComponent implements OnInit {
 
-  cells = ['1', '2', '3', '4', '5', '6', '7', '8', '9'];
+  @Input() cell!: Cell;
 
   constructor() { }
 
