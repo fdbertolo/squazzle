@@ -22,7 +22,7 @@ export class BoardComponent implements OnInit {
   }
 
   startGame() {
-    const settings = new GameConfiguration();
+    const settings = new GameConfiguration(6, 6);
     this.board = this.gameService.createEmptyBoard(settings);
     this.gameService.shuffleBoard(this.board);
   }
