@@ -54,8 +54,40 @@ export class GameService {
         let j1 = Math.floor(Math.random() * (cells.length));
         let temp = cells[i][j];
         cells[i][j] = cells[i1][j1];
+        this.updateCoordinates(cells[i][j], i, j);
         cells[i1][j1] = temp;
+        this.updateCoordinates(cells[i1][j1], i1, j1);
       }
     }
+  }
+
+  /**
+   * Swap cells and update coordinates
+   * @param board 
+   * @param currCell 
+   * @param cellToSwap 
+   */
+  swapCells(board: Board, currCell: Cell, cellToSwap: Cell) {
+    const currCellX = currCell.coordinateX;
+    const currCellY = currCell.coordinateY;
+    const cellToSwapX = cellToSwap.coordinateX;
+    const cellToSwapY = cellToSwap.coordinateY;
+    let cells = board.cells;
+    let temp = cells[currCellX][currCellY];
+    cells[currCellX][currCellY] = cells[cellToSwapX][cellToSwapY];
+    this.updateCoordinates(cells[currCellX][currCellY], currCellX, currCellY);
+    cells[cellToSwapX][cellToSwapY] = temp;
+    this.updateCoordinates(cells[cellToSwapX][cellToSwapY], cellToSwapX, cellToSwapY);
+  }
+
+  /**
+   * Update the X and Y coordinates for a given cell
+   * @param cell 
+   * @param x 
+   * @param y 
+   */
+  updateCoordinates(cell: Cell, x: number, y: number) {
+    cell.coordinateX = x;
+    cell.coordinateY = y;
   }
 }
