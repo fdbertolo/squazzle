@@ -34,6 +34,9 @@
             border-radius: 2px;
             box-sizing: border-box;
         }
+        &.empty {
+            opacity: 0.4;
+        }
     }
 }
 
