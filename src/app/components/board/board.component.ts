@@ -21,32 +21,40 @@ export class BoardComponent implements OnInit {
   }
 
   startGame() {
-    const settings = new GameConfiguration(6, 6);
+    const settings = new GameConfiguration(3, 3);
     this.board = this.gameService.createEmptyBoard(settings);
-    // this.gameService.shuffleBoard(this.board);
+    this.gameService.shuffleBoard(this.board);
   }
 
   @HostListener('window:keyup', ['$event'])
   keyEvent(event: KeyboardEvent) {
     this.emptyCell = this.gameService.getEmptyCell(this.board);
     let cellToSwap: Cell;
+    let validCoordinate;
+    let swapCellCoorX = -1;
+    let swapCellCoorY = -1;
     switch (event.key) {
       case KEY_CODE.RIGHT_ARROW:
-        cellToSwap = this.board.cells[this.emptyCell.coordinateX][this.emptyCell.coordinateY - 1];
-        this.tryToMove(cellToSwap);
+        swapCellCoorX = this.emptyCell.coordinateX;
+        swapCellCoorY = this.emptyCell.coordinateY - 1;
         break;
       case KEY_CODE.LEFT_ARROW:
-        cellToSwap = this.board.cells[this.emptyCell.coordinateX][this.emptyCell.coordinateY + 1];
-        this.tryToMove(cellToSwap);
+        swapCellCoorX = this.emptyCell.coordinateX;
+        swapCellCoorY = this.emptyCell.coordinateY + 1;
         break;
       case KEY_CODE.DOWN_ARROW:
-        cellToSwap = this.board.cells[this.emptyCell.coordinateX - 1][this.emptyCell.coordinateY];
-        this.tryToMove(cellToSwap);
+        swapCellCoorX = this.emptyCell.coordinateX - 1;
+        swapCellCoorY = this.emptyCell.coordinateY;
         break;
       case KEY_CODE.UP_ARROW:
-        cellToSwap = this.board.cells[this.emptyCell.coordinateX + 1][this.emptyCell.coordinateY];
-        this.tryToMove(cellToSwap);
+        swapCellCoorX = this.emptyCell.coordinateX + 1;
+        swapCellCoorY = this.emptyCell.coordinateY;
         break;
+    }
+    validCoordinate = this.gameService.isValidCoordinate(this.board.cells, swapCellCoorX, swapCellCoorY);
+    if (validCoordinate) {
+      cellToSwap = this.board.cells[swapCellCoorX][swapCellCoorY];
+      this.tryToMove(cellToSwap);
     }
   }
 
@@ -57,6 +65,10 @@ export class BoardComponent implements OnInit {
   tryToMove(cellToSwap: Cell) {
     if (cellToSwap && this.emptyCell) {
       this.gameService.swapCells(this.board, this.emptyCell, cellToSwap);
+      if (this.gameService.checkWin(this.board)) {
+        console.log('Ganaste');
+      }
     }
   }
+
 }

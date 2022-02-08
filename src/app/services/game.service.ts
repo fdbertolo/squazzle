@@ -104,4 +104,31 @@ export class GameService {
     }
     return emptyCell || cells[0][0];
   }
+
+  checkWin(board: Board): boolean {
+    const cells = board.cells;
+    let startNumber = 1;
+    for (let i = 0; i < cells.length; i++) {
+      for (let j = 0; j < cells[i].length; j++) {
+        if (startNumber !== cells[i][j].number) {
+          return false;
+        }
+        startNumber++;
+      }
+    }
+    return true;
+  }
+
+  isValidCoordinate(cells: Cell[][], x: number, y: number): boolean {
+    try {
+      if (cells[x][y]) {
+        return true;
+      } else {
+        return false;
+      }
+    } catch (error) {
+      return false;
+    }
+
+  }
 }
