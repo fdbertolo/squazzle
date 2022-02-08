@@ -35,6 +35,8 @@ export class GameService {
         number++;
       }
     }
+    // Set last cell as empty so we can use it to exchange cells.
+    cells[colsY - 1][colsX - 1].isEmpty = true;
     board.cells = cells;
     this.board = board;
     return board;
