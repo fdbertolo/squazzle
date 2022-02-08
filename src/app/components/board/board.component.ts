@@ -1,7 +1,7 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { GameConfiguration } from 'src/app/core/models/game';
 import { GameService } from '../../services/game.service';
-import { Board, Cell, KEY_CODE, AxisDirection } from '../../core/models/game';
+import { Board, Cell, KEY_CODE } from '../../core/models/game';
 @Component({
   selector: 'app-board',
   templateUrl: './board.component.html',
@@ -28,30 +28,35 @@ export class BoardComponent implements OnInit {
 
   @HostListener('window:keyup', ['$event'])
   keyEvent(event: KeyboardEvent) {
+    this.emptyCell = this.gameService.getEmptyCell(this.board);
+    let cellToSwap: Cell;
     switch (event.key) {
       case KEY_CODE.RIGHT_ARROW:
-        this.tryToMove(AxisDirection.RIGHT);
+        cellToSwap = this.board.cells[this.emptyCell.coordinateX][this.emptyCell.coordinateY - 1];
+        this.tryToMove(cellToSwap);
         break;
       case KEY_CODE.LEFT_ARROW:
-        this.tryToMove(AxisDirection.LEFT);
+        cellToSwap = this.board.cells[this.emptyCell.coordinateX][this.emptyCell.coordinateY + 1];
+        this.tryToMove(cellToSwap);
         break;
       case KEY_CODE.DOWN_ARROW:
-        this.tryToMove(AxisDirection.DOWN);
+        cellToSwap = this.board.cells[this.emptyCell.coordinateX - 1][this.emptyCell.coordinateY];
+        this.tryToMove(cellToSwap);
         break;
       case KEY_CODE.UP_ARROW:
-        this.tryToMove(AxisDirection.UP);
+        cellToSwap = this.board.cells[this.emptyCell.coordinateX + 1][this.emptyCell.coordinateY];
+        this.tryToMove(cellToSwap);
         break;
     }
   }
 
   /**
- * Move cell in the board
+ * Swap cell with empty cell
  * @param direction
  */
-  tryToMove(direction: AxisDirection) {
-    // TODO: This is just for testing purposes
-    let currCell = this.board.cells[1][1];
-    let swapCell = this.board.cells[1][2];
-    this.gameService.swapCells(this.board, currCell, swapCell);
+  tryToMove(cellToSwap: Cell) {
+    if (cellToSwap && this.emptyCell) {
+      this.gameService.swapCells(this.board, this.emptyCell, cellToSwap);
+    }
   }
 }

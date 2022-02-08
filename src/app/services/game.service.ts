@@ -90,4 +90,18 @@ export class GameService {
     cell.coordinateX = x;
     cell.coordinateY = y;
   }
+
+  getEmptyCell(board: Board): Cell {
+    const cells = board.cells;
+    let emptyCell;
+    for (let i = 0; i < cells.length; i++) {
+      for (let j = 0; j < cells[i].length; j++) {
+        if (cells[i][j].isEmpty) {
+          emptyCell = cells[i][j];
+          return emptyCell;
+        }
+      }
+    }
+    return emptyCell || cells[0][0];
+  }
 }
