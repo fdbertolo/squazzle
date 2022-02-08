@@ -21,9 +21,10 @@ export class BoardComponent implements OnInit {
     this.startGame();
   }
 
-  async startGame() {
+  startGame() {
     const settings = new GameConfiguration();
     this.board = this.gameService.createEmptyBoard(settings);
+    this.gameService.shuffleBoard(this.board);
   }
 
 }

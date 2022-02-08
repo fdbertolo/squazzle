@@ -17,6 +17,11 @@ export class GameService {
     this._board = board;
   }
 
+  /**
+   * Creates and return the initial board
+   * @param gameSetting 
+   * @returns 
+   */
   createEmptyBoard(gameSetting: GameConfiguration): Board {
     const cells: Cell[][] = [];
     const colsY = +gameSetting.cellsY;
@@ -33,5 +38,22 @@ export class GameService {
     board.cells = cells;
     this.board = board;
     return board;
+  }
+
+  /**
+   * Randomize the board
+   * @param board Game board
+   */
+  shuffleBoard(board: Board) {
+    const cells = board.cells;
+    for (let i = 0; i < cells.length; i++) {
+      for (let j = 0; j < cells[i].length; j++) {
+        let i1 = Math.floor(Math.random() * (cells.length));
+        let j1 = Math.floor(Math.random() * (cells.length));
+        let temp = cells[i][j];
+        cells[i][j] = cells[i1][j1];
+        cells[i1][j1] = temp;
+      }
+    }
   }
 }

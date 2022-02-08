@@ -9,6 +9,7 @@ export class Cell {
     number: number;
     coordinateX: number;
     coordinateY: number;
+    isEmpty?: boolean;
     constructor(number: number, coordX: number, coordY: number) {
         this.number = number;
         this.coordinateX = coordX;
