@@ -22,7 +22,7 @@ export class BoardComponent implements OnInit {
   }
 
   async startGame() {
-    const settings = new GameConfiguration();
+    const settings = new GameConfiguration(9, 9);
     this.board = this.gameService.createEmptyBoard(settings);
   }
 

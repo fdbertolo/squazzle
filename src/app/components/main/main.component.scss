@@ -10,6 +10,9 @@ main {
     h1 {
         text-align: center;
         margin-top: 50px;
+        &::selection {
+            background: $secondary;
+        }
     }
     ul {
         margin: 24px 0 48px;
@@ -17,18 +20,24 @@ main {
         list-style: none;
         display: flex;
         gap: 30px;
-        li.selected::before {
-            content: '';
-            position: absolute;
-            margin-top: 20px;
-            margin-left: -2px;
-            width: 52px;
-            height: 2px;
-            background: $secondary;
-        }
-        li:hover {
-            color: $secondary;
-            cursor: pointer;
+        
+        li {
+            &:hover {
+                color: $secondary;
+                cursor: pointer;
+            }
+            &::selection {
+                background: $secondary;
+            }
+            &.selected::before {
+                content: '';
+                position: absolute;
+                margin-top: 20px;
+                margin-left: -2px;
+                width: 52px;
+                height: 2px;
+                background: $secondary;
+            }
         }
     }
 }
