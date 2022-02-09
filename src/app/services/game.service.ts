@@ -28,10 +28,14 @@ export class GameService {
     const colsX = +gameSetting.cellsX;
     let board: Board = new Board();
     let number = 1;
+    let cellPosition = 100 / (colsY -1);
     for (let i: number = 0; i < colsX; i++) {
       cells[i] = [];
       for (let j: number = 0; j < colsY; j++) {
         cells[i][j] = new Cell(number, i, j);
+        let cell = cells[i][j];
+        cell.bgPositionY = i * cellPosition;
+        cell.bgPositionX = j * cellPosition;
         number++;
       }
     }

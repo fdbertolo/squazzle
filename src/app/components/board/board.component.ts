@@ -1,4 +1,4 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, HostListener, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { GameConfiguration } from 'src/app/core/models/game';
 import { GameService } from '../../services/game.service';
 import { Board, Cell, KEY_CODE } from '../../core/models/game';
@@ -7,8 +7,9 @@ import { Board, Cell, KEY_CODE } from '../../core/models/game';
   templateUrl: './board.component.html',
   styleUrls: ['./board.component.scss']
 })
-export class BoardComponent implements OnInit {
+export class BoardComponent implements OnChanges {
 
+  @Input() difficulty = 3;
   board!: Board;
   cells!: Cell[][];
   currentCell!: Cell;
@@ -17,14 +18,17 @@ export class BoardComponent implements OnInit {
 
   constructor(private gameService: GameService) { }
 
-  ngOnInit(): void {
-    this.startGame();
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['difficulty']?.currentValue) {
+      this.startGame(changes['difficulty'].currentValue);
+    }
   }
 
-  startGame() {
-    const settings = new GameConfiguration(3, 3);
+  startGame(difficulty: number) {
+    this.userWin = false;
+    const settings = new GameConfiguration(difficulty, difficulty);
     this.board = this.gameService.createEmptyBoard(settings);
-    this.gameService.shuffleBoard(this.board);
+    // this.gameService.shuffleBoard(this.board);
   }
 
   @HostListener('window:keyup', ['$event'])
@@ -64,13 +68,19 @@ export class BoardComponent implements OnInit {
  * @param direction
  */
   tryToMove(cellToSwap: Cell) {
-    if (cellToSwap && this.emptyCell) {
+    if (cellToSwap && this.emptyCell && !this.userWin) {
       this.gameService.swapCells(this.board, this.emptyCell, cellToSwap);
       if (this.gameService.checkWin(this.board)) {
         console.log('Ganaste');
         this.userWin = true;
       }
     }
+  }
+
+  getPosition(cell: Cell) {
+    return {
+      'background-position': `${cell.bgPositionX}% ${cell.bgPositionY}%`
+    };
   }
 
 }

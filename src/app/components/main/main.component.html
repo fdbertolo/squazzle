@@ -2,10 +2,10 @@
     <h1>SQUAZZLE</h1>
     <nav>
         <ul>
-            <li class="selected">3x3</li>
-            <li>6x6</li>
-            <li>9x9</li>
+            <li [ngClass]="{'selected': difficultyNumber === 3}" (click)="changeDifficulty(3)">3x3</li>
+            <li [ngClass]="{'selected': difficultyNumber === 5}" (click)="changeDifficulty(5)">5x5</li>
+            <li [ngClass]="{'selected': difficultyNumber === 7}" (click)="changeDifficulty(7)">7x7</li>
         </ul>
     </nav>
-    <app-board></app-board>
+    <app-board [difficulty]="difficultyNumber"></app-board>
 </main>

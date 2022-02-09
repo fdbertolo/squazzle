@@ -10,12 +10,14 @@ export class Cell {
     coordinateX: number;
     coordinateY: number;
     isEmpty?: boolean;
+    bgPositionX?: number;
+    bgPositionY?: number;
     constructor(number: number, coordX: number, coordY: number) {
         this.number = number;
         this.coordinateX = coordX;
         this.coordinateY = coordY;
     }
-}
+}   
 export class GameConfiguration {
     cellsX: number;
     cellsY: number;
