@@ -28,7 +28,7 @@ export class BoardComponent implements OnChanges {
     this.userWin = false;
     const settings = new GameConfiguration(difficulty, difficulty);
     this.board = this.gameService.createEmptyBoard(settings);
-    // this.gameService.shuffleBoard(this.board);
+    this.gameService.shuffleBoard(this.board);
   }
 
   @HostListener('window:keyup', ['$event'])
