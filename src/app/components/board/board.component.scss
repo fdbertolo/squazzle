@@ -35,8 +35,11 @@
             box-sizing: border-box;
         }
         &.empty {
-            opacity: 0.4;
+            background-color: $dark-grey;
+            outline: none;
+            cursor: auto;
         }
+
     }
 }
 
