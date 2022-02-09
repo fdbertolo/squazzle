@@ -67,6 +67,14 @@ h2 {
     }
 }
 
+h5 {
+    position: absolute;
+    margin-top: -20px;
+    &::selection {
+        background: $secondary;
+    }
+}
+
 .cell-row {
     display: flex;
     gap: 5px;

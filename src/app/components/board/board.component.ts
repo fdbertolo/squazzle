@@ -15,6 +15,7 @@ export class BoardComponent implements OnChanges {
   currentCell!: Cell;
   emptyCell!: Cell;
   userWin = false;
+  totalMovements = 0;
 
   constructor(private gameService: GameService) { }
 
@@ -60,6 +61,7 @@ export class BoardComponent implements OnChanges {
     if (validCoordinate) {
       cellToSwap = this.board.cells[swapCellCoorX][swapCellCoorY];
       this.tryToMove(cellToSwap);
+      this.totalMovements++;
     }
   }
 
