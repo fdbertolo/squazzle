@@ -13,6 +13,7 @@ export class BoardComponent implements OnInit {
   cells!: Cell[][];
   currentCell!: Cell;
   emptyCell!: Cell;
+  userWin = false;
 
   constructor(private gameService: GameService) { }
 
@@ -67,6 +68,7 @@ export class BoardComponent implements OnInit {
       this.gameService.swapCells(this.board, this.emptyCell, cellToSwap);
       if (this.gameService.checkWin(this.board)) {
         console.log('Ganaste');
+        this.userWin = true;
       }
     }
   }
