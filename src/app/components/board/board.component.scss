@@ -56,6 +56,9 @@
 }
 
 h2 {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
     position: absolute;
     margin-top: 630px;
     width: 600px;
@@ -64,6 +67,22 @@ h2 {
     animation-iteration-count: infinite;
     &::selection {
         background: $secondary;
+    }
+    a {
+        text-decoration: none;
+        color: $secondary;
+        padding: 10px 15px;
+        border: 2px solid $secondary;
+        border-radius: 30px;
+        font-size: 12px;
+        margin-top: 20px;
+        width: 120px;
+        background: $dark-grey;
+        &:hover {
+            border: 2px solid $primary-light;
+            color: $primary-light;
+            background: transparent;
+        }
     }
 }
 
@@ -87,8 +106,9 @@ h5 {
         box-sizing: border-box;
         cursor: pointer;
         background-image: url('https://picsum.photos/600');
+        background-color: $dark-grey;
         &:hover {
-            outline: 2px solid $white;
+            outline: 2px solid $primary-light;
             border-radius: 2px;
             box-sizing: border-box;
         }
@@ -102,9 +122,34 @@ h5 {
     }
 }
 
+@media screen and (max-width: 1280px) {
+    :host {
+        max-width: 500px;
+        max-height: 500px;
+    }
+    .cell-row {
+        .field {
+            background-image: url('https://picsum.photos/500');
+        }
+    }
+    h2 {
+        margin-top: 530px;
+        width: 500px;
+    }
+}
+
 @media screen and (max-width: 600px) {
     :host {
         max-width: 360px;
         max-height: 360px;
+    }
+    .cell-row {
+        .field {
+            background-image: url('https://picsum.photos/360');
+        }
+    }
+    h2 {
+        margin-top: 390px;
+        width: 360px;
     }
 }
