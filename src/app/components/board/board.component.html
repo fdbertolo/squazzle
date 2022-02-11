@@ -1,5 +1,5 @@
-<div class="img-container">
-    <h5>Total Movements: {{totalMovements}}</h5>
+<div class="img-container" [ngClass]="{'user-win': userWin}">
+    <h5>Moves: {{totalMovements}}</h5>
     <div *ngFor="let row of board.cells" class="cell-row">
         <div class="field" [ngStyle]="getPosition(cell)" [ngClass]="{'empty': cell.isEmpty && !userWin}" *ngFor="let cell of row">
             <app-cell [cell]="cell"></app-cell>
