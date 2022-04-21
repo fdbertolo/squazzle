@@ -1,7 +1,19 @@
 <div class="img-container" [ngClass]="{'user-win': userWin}">
     <h5>Moves: {{totalMovements}}</h5>
+    <!-- <div class="game-mode">
+        <button class="random" title="Random images" [ngClass]="{'active': randomImages}" (click)="changeImage(1)">
+            <em>🔀</em>
+        </button>
+        <button class="cat" title="Cat images" [ngClass]="{'active': catImages}" (click)="changeImage(2)">
+            <em>🐱</em>
+        </button>
+        <button class="dog" title="Dog images" [ngClass]="{'active': dogImages}" (click)="changeImage(3)">
+            <em>🐶</em> 
+        </button>
+    </div> -->
     <div *ngFor="let row of board.cells" class="cell-row">
-        <div class="field" [ngStyle]="getPosition(cell)" [ngClass]="{'empty': cell.isEmpty && !userWin}" *ngFor="let cell of row">
+        <div class="field" [ngStyle]="getPosition(cell)" [ngClass]="{'empty': cell.isEmpty && !userWin}" 
+        *ngFor="let cell of row" (click)="moveCellOnClick(cell)">
             <app-cell [cell]="cell"></app-cell>
         </div>
     </div>

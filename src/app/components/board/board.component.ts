@@ -17,6 +17,10 @@ export class BoardComponent implements OnChanges {
   userWin = false;
   totalMovements = 0;
 
+  randomImages = true;
+  catImages = false;
+  dogImages = false;
+
   constructor(private gameService: GameService) { }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -61,17 +65,43 @@ export class BoardComponent implements OnChanges {
     if (validCoordinate) {
       cellToSwap = this.board.cells[swapCellCoorX][swapCellCoorY];
       this.tryToMove(cellToSwap);
-      this.totalMovements++;
     }
+  }
+
+  moveCellOnClick(cell: Cell) {
+    this.emptyCell = this.gameService.getEmptyCell(this.board);
+    let currentCoordinateX = cell.coordinateX;
+    let currentCoordinateY = cell.coordinateY;
+
+    this.tryToGo(cell, currentCoordinateX, currentCoordinateY - 1) || 
+    this.tryToGo(cell, currentCoordinateX, currentCoordinateY + 1) || 
+    this.tryToGo(cell, currentCoordinateX + 1, currentCoordinateY) || 
+    this.tryToGo(cell, currentCoordinateX - 1, currentCoordinateY);
+  
+  }
+
+  tryToGo(currentCell: Cell, x: number, y: number): boolean {
+    const validCoordinate = this.gameService.isValidCoordinate(this.board.cells, x, y);
+    let moved = false;
+    if (validCoordinate) {
+      const nextCell = this.board.cells[x][y];
+      if (nextCell.isEmpty) {
+        this.emptyCell = nextCell;
+        this.tryToMove(currentCell);
+        moved = true;
+      }
+    }
+    return moved;
   }
 
   /**
  * Swap cell with empty cell
  * @param direction
  */
-  tryToMove(cellToSwap: Cell) {
+  tryToMove(cellToSwap: Cell): void {
     if (cellToSwap && this.emptyCell && !this.userWin) {
       this.gameService.swapCells(this.board, this.emptyCell, cellToSwap);
+      this.totalMovements++;
       if (this.gameService.checkWin(this.board)) {
         console.log('Ganaste');
         this.userWin = true;
@@ -85,4 +115,9 @@ export class BoardComponent implements OnChanges {
     };
   }
 
+  changeImage(id: number) {
+    this.randomImages === this.randomImages && id === 1 ? this.randomImages = true : this.randomImages = false;
+    this.catImages === this.catImages && id === 2 ? this.catImages = true : this.catImages = false;
+    this.dogImages === this.dogImages && id === 3 ? this.dogImages = true : this.dogImages = false;
+  }
 }
